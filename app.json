@@ -4,13 +4,12 @@
     "slug": "bmcoderassignment",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logopage.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/images/logopage.png",
+      "resizeMode": "contain"
     },
     "ios": {
       "supportsTablet": true
@@ -31,6 +30,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "a81a3ac4-2372-49bb-bf4d-fb2b5135d4fe"
+      }
+    },
+    "owner": "dhananjayahlawat"
   }
 }
