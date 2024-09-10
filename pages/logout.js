@@ -1,27 +1,31 @@
-import React from 'react';
 import { StyleSheet, View, Image, Dimensions, Text, TouchableOpacity } from 'react-native';
 
 // Get the screen width and height for positioning
 const { width, height } = Dimensions.get('window');
 
-const App = () => {
+export const Logout = ({Welcomescreen,name,sinin,sinup}) => {
+  const jumptowelcomescreen = () => {
+    sinup(false);
+    sinin(false);
+    Welcomescreen(true);
+  }
   return (
     <View style={styles.container}>
       {/* Logo */}
       <Image
-        source={require('./assets/logo.png')} // Replace with your local logo image
+        source={require('../assets/images/logo.png')} // Replace with your local logo image
         style={styles.logo}
         resizeMode="contain"
       />
 
       {/* Welcome Text */}
       <View style={styles.textContainer}>
-        <Text style={styles.welcomeText}>Welcome</Text>
+        <Text style={styles.welcomeText}>Welcome {name}</Text>
       </View>
 
       {/* Log Out Button */}
       <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={jumptowelcomescreen}>
         <Text style={styles.buttonText}>Log Out</Text>
       </TouchableOpacity>
       </View>
@@ -82,5 +86,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default App;

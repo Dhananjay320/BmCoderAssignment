@@ -4,26 +4,35 @@ import { StyleSheet, View, Image, Text, Dimensions, TouchableOpacity } from 'rea
 // Get the screen width and height for positioning
 const { width, height } = Dimensions.get('window');
 
-const App = () => {
+export const Welcome = ({sinin, sinup,Welcomescreen}) => {
+  const sinuppagejump = () =>{
+    sinin(false);
+    sinup(true);
+    Welcomescreen(false);
+  }
+  const sininpagejump = () =>{
+    sinin(true);
+    Welcomescreen(false);
+  }
   return (
     <View style={styles.container}>
       {/* Top right image */}
       <Image
-        source={require('./assets/righttop.png')}
+        source={require('../assets/images/righttop.png')}
         style={styles.imageTopRight}
         resizeMode="contain"
       />
 
       {/* Top left image */}
       <Image
-        source={require('./assets/lefttop.png')}
+        source={require('../assets/images/lefttop.png')}
         style={styles.imageTopLeft}
         resizeMode="contain"
       />
 
       {/* Centered logo */}
       <Image
-        source={require('./assets/logo.png')}
+        source={require('../assets/images/logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -36,12 +45,12 @@ const App = () => {
 
       {/* Button and Sign In Text */}
       <View style={styles.buttonSignInContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={sinuppagejump}>
           <Text style={styles.buttonText}>Let’s Start</Text>
         </TouchableOpacity>
         <View style={styles.signInContainer}>
           <Text style={styles.plainText}>Already have an account?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={sininpagejump}>
             <Text style={styles.signInButtonText}>Sign in</Text>
           </TouchableOpacity>
         </View>
@@ -54,23 +63,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-    backgroundColor: 'white',
   },
   imageTopRight: {
-    width: width * 0.5,    
+    width: width * 0.59,    
     height: height * 0.3,  
     position: 'absolute',
     top: 0,
     right: 0,
-    opacity: 0.5,
   },
   imageTopLeft: {
-    width: width * 0.5,    
-    height: height * 0.3,  
+    width: width * 0.59,    
+    height:  height * 0.3, 
     position: 'absolute',
     top: 0,
     left: 0,
-    opacity: 0.5,
   },
   logo: {
     width: width * 0.8,    
@@ -147,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+

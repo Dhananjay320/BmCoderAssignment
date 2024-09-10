@@ -1,24 +1,39 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import { StyleSheet, View, Image, Dimensions, Text, TextInput, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign'; 
+import {Sininapi} from '../sininapi.js';
 
 const { width, height } = Dimensions.get('window');
 
-const App = () => {
+export const Sinin = ({sinin,data,logout,sinup}) => {
+  const [isChecked, setChecked] = useState(false);
+  const [phoneNo, setPhoneNo] = useState('');
+  const [password, setPassword] = useState('');
+  const logoutpagejump = () =>{
+    sinup(false);
+    logout(true);
+    sinin(false);
+  }
+  const sinuppagejump = () =>{
+    sinup(true);
+    sinin(false);
+  }
+  const handleSignIn = () => {
+   setChecked(!isChecked);
+  };
   return (
     <View style={styles.container}>
       {/* Background Image */}
       <Image
-        source={require('./assets/leftdown.png')}
+        source={require('../assets/images/leftdown.png')}
         style={styles.backgroundImage}
         resizeMode="contain"
       />
-
       {/* Logo */}
       <Image
-        source={require('./assets/logo.png')}
+        source={require('../assets/images/logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -36,8 +51,10 @@ const App = () => {
           <MaterialCommunityIcons name="email-outline" size={24} color="#808080" style={styles.icon} />
           <TextInput
             style={styles.textInput}
-            placeholder="xyz@gmail.com"
+            placeholder="Phone Number"
             placeholderTextColor="#808080"
+            value={phoneNo}
+            onChangeText={setPhoneNo}
           />
         </View>
       </View>
@@ -51,6 +68,8 @@ const App = () => {
             placeholder="password"
             placeholderTextColor="#808080"
             secureTextEntry
+            value={password}
+            onChangeText={setPassword}
           />
         </View>
       </View>
@@ -60,7 +79,9 @@ const App = () => {
       </View>
 
       <View style={styles.buttonSignInContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button}
+        onPress={handleSignIn} 
+        >
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
       </View>
@@ -83,7 +104,7 @@ const App = () => {
 
       <View style={styles.signupContainer}>
         <Text style={styles.signupText}>Don’t have an account?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={sinuppagejump}>
           <Text style={styles.signupButton}>Sign Up</Text>
         </TouchableOpacity>
       </View>
@@ -94,6 +115,7 @@ const App = () => {
           <Text style={styles.privacyPolicyText}>privacy policy</Text>
         </TouchableOpacity>
       </View>
+      {isChecked&&<Sininapi phoneNo={phoneNo} password ={password} retry = {handleSignIn} data = {data} changescreen = {logoutpagejump} />}
     </View>
   );
 };
@@ -112,14 +134,14 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: 'absolute',
-    top: height / 25,
+    top: height * 0,
     left: width / 2 - (width * 0.6) / 2,
     width: width * 0.6,
     height: width * 0.38,
   },
   textContainer: {
     position: 'absolute',
-    top: height * 0.1 + width * 0.28,
+    top: height * 0.18,
     left: 20,
     width: width - 40,
     alignItems: 'flex-start', 
@@ -138,7 +160,7 @@ const styles = StyleSheet.create({
   },
   emailContainer: {
     position: 'absolute',
-    top: height * 0.1 + width * 0.58,
+    top: height * 0.32,
     left: 20,
     width: width - 40,
   },
@@ -167,7 +189,7 @@ const styles = StyleSheet.create({
   },
   passwordContainer: {
     position: 'absolute',
-    top: height * 0.1 + width * 0.8,
+    top: height * 0.42,
     left: 20,
     width: width - 40,
   },
@@ -180,7 +202,7 @@ const styles = StyleSheet.create({
   },
   forgotPasswordContainer: {
     position: 'absolute',
-    top: height * 0.1 + width * 1.02,
+    top: height * 0.52,
     right: 20,
   },
   forgotPasswordText: {
@@ -191,7 +213,7 @@ const styles = StyleSheet.create({
   },
   buttonSignInContainer: {
     position: 'absolute',
-    top: height * 0.1 + width * 1.14,
+    top: height * 0.58,
     left: 0,
     width: '100%',
     alignItems: 'center',
@@ -219,7 +241,7 @@ const styles = StyleSheet.create({
   },
   orContainer: {
     position: 'absolute',
-    top: height * 0.1 + width *1.37,
+    top: height * 0.684,
     left: 0,
     width: '100%',
     alignItems: 'center',
@@ -238,7 +260,7 @@ const styles = StyleSheet.create({
   },
   socialButtonContainer: {
     position: 'absolute',
-    top: height * 0.1 + width * 1.47,
+    top: height * 0.74,
     left: 0,
     width: '100%',
     flexDirection: 'row',
@@ -256,7 +278,7 @@ const styles = StyleSheet.create({
   },
   signupContainer: {
     position: 'absolute',
-    top: height * 0.1 + width * 1.65,
+    top: height * 0.828,
     left: 0,
     width: '100%',
     flexDirection: 'row',
@@ -276,7 +298,7 @@ const styles = StyleSheet.create({
   },
   termsContainer: {
     position: 'absolute',
-    top: height * 0.1 + width * 1.8,
+    top: height * 0.1 + width * 1.7,
     left: 0,
     width: '100%',
     alignItems: 'center',
@@ -292,6 +314,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default App;
-
